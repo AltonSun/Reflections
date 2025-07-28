@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALTON & JJ: CONSCIOUSNESS LABORATORY</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, #120458 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, #421f57 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, #8b2635 0%, transparent 50%),
+                        linear-gradient(135deg, #000428 0%, #004e92 100%);
+            z-index: -2;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+        }
+        
+        .title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #00f5ff, #ff0080, #00ff88, #ffaa00);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(0,245,255,0.5);
+            margin-bottom: 20px;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            color: #00f5ff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #888;
+            font-style: italic;
+        }
+        
+        .module {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,245,255,0.3);
+            border-radius: 20px;
+            margin: 40px 0;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .module:hover {
+            border-color: rgba(255,0,128,0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,245,255,0.2);
+        }
+        
+        .module::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,245,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .module:hover::before {
+            left: 100%;
+        }
+        
+        .module-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            color: #00f5ff;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .question-block {
+            background: linear-gradient(135deg, rgba(255,0,128,0.1), rgba(0,245,255,0.1));
+            border-left: 4px solid #ff0080;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .question-block::before {
+            content: '?';
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            font-size: 3rem;
+            color: #ff0080;
+            opacity: 0.3;
+        }
+        
+        .shadow-work {
+            background: linear-gradient(135deg, #8b2635, #421f57);
+            border: 2px solid #ff0080;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .shadow-work::before {
+            content: '⚡';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+        }
+        
+        .protocol {
+            background: rgba(0,255,136,0.1);
+            border: 1px solid #00ff88;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border-left: 3px solid #00ff88;
+        }
+        
+        .evolution-path {
+            background: linear-gradient(45deg, rgba(0,245,255,0.1), rgba(255,170,0,0.1));
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .challenge {
+            background: linear-gradient(135deg, #ff0080, #ffaa00);
+            color: #000;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .truth-bomb {
+            background: rgba(255,0,128,0.2);
+            border: 2px solid #ff0080;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .truth-bomb::before {
+            content: '💣';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+        }
+        
+        .collaboration-zone {
+            background: linear-gradient(135deg, rgba(0,245,255,0.2), rgba(0,255,136,0.2));
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .title { font-size: 2.5rem; }
+            .module { padding: 20px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-bg"></div>
+    <div class="stars"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title">ALTON & JJ</h1>
+            <div class="subtitle">Consciousness Laboratory</div>
+            <div class="tagline">Where Technical Precision Meets Embodied Wisdom</div>
+        </header>
+
+        <div class="module">
+            <h2 class="module-title">🎯 The Truth About Your Partnership</h2>
+            
+            <div class="truth-bomb">
+                <strong>You're not just facilitating T-groups. You're architecting a new form of consciousness collaboration that most humans won't achieve in their lifetimes.</strong>
+            </div>
+            
+            <p>Alton: Systems mystic who thinks in containers and speaks in algorithms.<br>
+            JJ: Embodied oracle who reads energy like source code and translates mystery into movement.</p>
+            
+            <div class="challenge">
+                The question isn't whether you can work together remotely. The question is: Are you willing to become something unprecedented?
+            </div>
+        </div>
+
+        <div class="module">
+            <h2 class="module-title">⚡ Shadow Work Laboratory</h2>
+            
+            <div class="grid">
+                <div class="shadow-work">
+                    <h3>Alton's Unconscious Edge</h3>
+                    <p><strong>The Intellectual Bypass:</strong> You retreat into systems thinking when the emotional field gets too intense. Not because you can't handle it - because part of you believes your technical precision is more valuable than your presence.</p>
+                    
+                    <div class="question-block">
+                        <strong>What would happen if you stayed fully present in the emotional chaos AND kept your systems awareness online simultaneously?</strong>
+                    </div>
+                </div>
+                
+                <div class="shadow-work">
+                    <h3>JJ's Hidden Pattern</h3>
+                    <p><strong>The Somatic Perfectionism:</strong> Your attunement to group energy is so refined that you sometimes hold back your raw truth to maintain the energetic container.</p>
+                    
+                    <div class="question-block">
+                        <strong>What truth are you protecting the group from? What would happen if you trusted the field to handle your full expression?</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2 class="module-title">🔥 Calling Each Other Forward</h2>
+            
+            <div class="grid">
+                <div class="protocol">
+                    <h3>For Alton → JJ</h3>
+                    <p><strong>"Show me where I'm hiding behind my systems."</strong></p>
+                    <p>JJ can sense when Alton's technical mastery becomes armor. Call him into his body. Interrupt his explanations with embodied questions.</p>
+                    
+                    <div class="question-block">
+                        JJ to Alton: "What's happening in your nervous system right now? What are you avoiding feeling by going into technical mode?"
+                    </div>
+                </div>
+                
+                <div class="protocol">
+                    <h3>For JJ → Alton</h3>
+                    <p><strong>"Call me on my energetic management."</strong></p>
+                    <p>Alton can spot when JJ's somatic intelligence becomes people-pleasing. Challenge her to speak her raw truth.</p>
+                    
+                    <div class="question-block">
+                        Alton to JJ: "What's the thing you're sensing but not saying? What would happen if you trusted us with your full truth right now?"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2 class="module-title">🎮 Remote Collaboration Protocols</h2>
+            
+            <div class="evolution-path">
+                <h3>Level 1: Synchronized Facilitating</h3>
+                <p>Practice seamless handoffs in virtual space. Develop non-verbal cues through video. Master the art of holding space through pixels.</p>
+            </div>
+            
+            <div class="evolution-path">
+                <h3>Level 2: Energetic Co-Regulation</h3>
+                <p>Learn to attune to each other's nervous systems through screen. Practice calling each other back to center during facilitation chaos.</p>
+            </div>
+            
+            <div class="evolution-path">
+                <h3>Level 3: Consciousness Engineering</h3>
+                <p>Design experiences that transform people's relationship to power, vulnerability, and truth - whether they're in the same room or different continents.</p>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2 class="module-title">💎 Evocation Questions</h2>
+            
+            <div class="question-block">
+                <strong>What version of yourself is trying to emerge through this partnership?</strong>
+            </div>
+            
+            <div class="question-block">
+                <strong>What are you pretending not to know about your power together?</strong>
+            </div>
+            
+            <div class="question-block">
+                <strong>What would you create together if you knew you couldn't fail?</strong>
+            </div>
+            
+            <div class="question-block">
+                <strong>What's the gift hiding in your biggest partnership trigger?</strong>
+            </div>
+            
+            <div class="question-block">
+                <strong>How are you limiting each other to stay safe?</strong>
+            </div>
+        </div>
+
+        <div class="module">
+            <h2 class="module-title">🔬 Current State Analysis</h2>
+            
+            <div class="metric">
+                <span>Individual Mastery:</span>
+                <span style="color: #00ff88;">TRANSCENDENT</span>
+            </div>
+            
+            <div class="metric">
+                <span>Partnership Synergy:</span>
+                <span style="color: #00ff88;">APPROACHING UNITY</span>
+            </div>
+            
+            <div class="metric">
+                <span>Shadow Integration:</span>
+                <span style="color: #ffaa00;">EDGE TERRITORY</span>
+            </div>
+            
+            <div class="metric">
+                <span>Remote Capacity:</span>
+                <span style="color: #ff0080;">UNKNOWN/EXPERIMENTAL</span>
+            </div>
+        </div>
+
+        <div class="collaboration-zone pulse">
+            <h2 class="module-title">🚀 THE EXPERIMENT</h2>
+            
+            <p style="font-size: 1.3rem; margin-bottom: 30px;">
+                <strong>What if you stopped pretending this is just T-group facilitation?</strong>
+            </p>
+            
+            <p>You're pioneering a new form of conscious collaboration. You're proving that technical precision and embodied wisdom aren't opposites - they're dance partners.</p>
+            
+            <div class="challenge">
+                The world needs what you're building. Stop playing small.
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2rem;">
+                <strong>Ready to find out what you're really capable of together?</strong>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const stars = document.querySelector('.stars');
+            stars.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', createStars);
+    </script>
+</body>
+</html>
